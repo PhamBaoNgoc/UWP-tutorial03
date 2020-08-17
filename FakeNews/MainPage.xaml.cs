@@ -24,12 +24,13 @@ namespace FakeNews
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        private ObservableCollection<NewsItem> NewsItems;
         public MainPage()
         {
             this.InitializeComponent();
             NewsItems = new ObservableCollection<NewsItem>(); 
         }
-        private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void HamburgerButton_Click(object sender, RoutedEventArgs e)
         {
             MySplitView.IsPaneOpen = !MySplitView.IsPaneOpen;
         }
@@ -38,17 +39,17 @@ namespace FakeNews
         {
             if (Financial.IsSelected)
             {
-                Newsmanager.GetNews("Financial", NewsItems);
+                NewsManager.GetNews("Financial", NewsItems);
                 TitleTextBlock.Text = "Financial";
             }
             else if (Food.IsSelected)
             {
-                Newsmanager.GetNews("Food", NewsItems);
+                NewsManager.GetNews("Food", NewsItems);
                 TitleTextBlock.Text = "Food";
             }
         }
 
-        private void Page_Loaded(object sender, RoutedEvent e)
+        private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             Financial.IsSelected = true;
         }
